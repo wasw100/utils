@@ -22,11 +22,23 @@ def num_to_ip(num):
         return ".".join([str((num >> ((3-i)*8)) & 0xFF) for i in range(0, 4)])
 
 
-def random_ip():
+def _gen_rand():
+    return random.randint(0, 255)
+
+
+def gen_pub_ip():
     """generate a random ip"""
-    num = random.randint(0, 0xFFFFFFFF)
-    return num_to_ip(num)
+    not_valid = [10, 127, 169, 172, 192]
+    first = _gen_rand()
+    while first in not_valid:
+        first = _gen_rand()
+
+    rand_strs = [str(first)]
+    for _ in range(3):
+        rand_strs.append(str(_gen_rand()))
+
+    return '.'.join(rand_strs)
 
 
 if __name__ == '__main__':
-    print random_ip()
+    print gen_pub_ip()
