@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import random
 
+
 def ip_to_num(ip):
     """Takes an IP string and returns its decimal equivalent"""
     octects = ip.split(".")
     if len(octects) == 4:
-        num = sum([int(octects[i]) << ((3-i)*8) for i in range(0,4)])
+        num = sum([int(octects[i]) << ((3-i)*8) for i in range(0, 4)])
         if num < 0 or num > 0xFFFFFFFF:
             return None
         else:
