@@ -35,7 +35,7 @@ def get_requests_session(cookies, referer=None, ua=None):
     """
     session = requests.Session()
     if referer:
-        session.headers['Referer'] = 'http://i.qq.com/'
+        session.headers['Referer'] = referer
     if ua:
         session.headers['User-Agent'] = ua
 
