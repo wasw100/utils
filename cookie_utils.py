@@ -8,6 +8,9 @@ import Cookie
 
 def cookie_to_dict(cookie):
     """Convert a string cookie into a dict"""
+    if isinstance(cookie, unicode):
+        cookie = cookie.encode('utf-8')
+
     cookie_dict = dict()
     C = Cookie.SimpleCookie(cookie)
     for morsel in C.values():
@@ -63,8 +66,6 @@ def get_httpclient_cookie(response, request=None):
 
     request_cookie = request.headers.get("Cookie")
     if request_cookie:
-        if type("") != type(request_cookie):
-            request_cookie = request_cookie.encode("utf-8")
         cookie_dict = cookie_to_dict(request_cookie)
         requests.cookies.cookiejar_from_dict(cookie_dict, cookiejar)
 
